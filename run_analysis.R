@@ -1,6 +1,5 @@
-setwd('C:/Users/dyoon/Desktop/R Coursera')
-
-#Download and Unzip the file
+### Answer for 1 ###
+# Download and Unzip the file
 if(!file.exists('./wk4data')) {dir.create('./wk4data')}
 fileurl <- 'https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip'
 download.file(fileurl, destfile = './wk4data/projectdataset.zip')
@@ -40,33 +39,28 @@ test <- cbind(xtest, subjecttest, ytest)
 train <- cbind(xtrain, subjecttrain, ytrain)
 testandtrain <- rbind(test, train)
 
-# Answer for 1:
 print(testandtrain)
 
-#################
-
+### Answer for 2 ###
 # Mean and Stdev for each measurement
 y_id_check <- grepl('y_id', colnames(testandtrain))
 subject_id_check <- grepl('subject_id', colnames(testandtrain))
 mean_check <- grepl('*mean*', colnames(testandtrain))
 std_check <- grepl('*std*', colnames(testandtrain))
 
-
 mean_and_std <- testandtrain[, y_id_check == TRUE | subject_id_check == TRUE | mean_check == TRUE | std_check == TRUE]
 
-# Answer for 2:
 print(mean_and_std)
 
-#################
+### Answer for 3 & 4 ###
 mean_and_std_labeled <- merge(mean_and_std
                                 , activitylabels
                                 , by.x = 'y_id'
                                 , by.y = 'activity_id'
                                 , all.x = TRUE)
 
-# Answer for 3 & 4:
 print(mean_and_std_labeled)
 
-# Answer for 5:
+### Answer for 5 ###
 tidy <- data.frame(mean_and_std_labeled)
 print(apply(tidy,2,mean))
