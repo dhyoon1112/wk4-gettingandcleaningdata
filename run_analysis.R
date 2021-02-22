@@ -66,4 +66,4 @@ tidy_subject <- aggregate(. ~ subject_id, mean_and_std_labeled, mean)
 tidy_activity <- aggregate(. ~ activity, mean_and_std_labeled, mean)
 tidy <- c(tidy_subject, tidy_activity)
 
-write.table(tidy, file = 'tidy.txt', sep = '\t', col.names = TRUE)
+write.table(tidy, file = 'tidy.txt', sep = '\t', col.names = TRUE, row.names = FALSE)
