@@ -62,5 +62,8 @@ mean_and_std_labeled <- merge(mean_and_std
 print(mean_and_std_labeled)
 
 ### Answer for 5 ###
-tidy <- data.frame(mean_and_std_labeled)
-print(apply(tidy,2,mean))
+tidy_subject <- aggregate(. ~ subject_id, mean_and_std_labeled, mean)
+tidy_activity <- aggregate(. ~ activity, mean_and_std_labeled, mean)
+tidy <- c(tidy_subject, tidy_activity)
+
+write.table(tidy, file = 'tidy.txt', sep = '\t', col.names = TRUE)
